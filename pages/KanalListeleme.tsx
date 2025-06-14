@@ -1,28 +1,18 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
 
-const KanalListeleme = ({ kanallar }) => {
+const KanalListeleme: React.FC<{ kanallar: Array<{ id: number, isim: string }> }> = ({ kanallar }) => {
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>İsim</TableCell>
-            <TableCell>Açıklama</TableCell>
-            <TableCell>Durum</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {kanallar.map((kanal) => (
-            <TableRow key={kanal.id}>
-              <TableCell>{kanal.isim}</TableCell>
-              <TableCell>{kanal.aciklama}</TableCell>
-              <TableCell>{kanal.durum}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Box>
+      <Typography variant="h6">Kanal Listeleme</Typography>
+      <List>
+        {kanallar.map( kanal => (
+          <ListItem key={kanal.id}>
+            <ListItemText primary={kanal.isim} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
 };
 
