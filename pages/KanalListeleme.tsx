@@ -1,43 +1,33 @@
 import React from 'react';
-import { Box, Typography, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { VideoLibrary } from '@mui/icons-material';
+import { Box, Typography, Grid, Paper } from '@mui/material';
 
-const KanalListeleme: React.FC = () => {
+const KanalListeleme = () => {
   const kanallar = [
-    { name: 'Kanal A' },
-    { name: 'Kanal B' },
-    { name: 'Kanal C' },
-    { name: 'Kanal D' }
+    { id: 1, isim: '#Genel', aboneSayisi: 1200 },
+    { id: 2, isim: '#Programlama', aboneSayisi: 950 },
+    { id: 3, isim: '#Müzik', aboneSayisi: 800 },
+    { id: 4, isim: 'Duyurular', aboneSayisi: 500 }
   ];
+
   return (
-    <Box
-      sx={{
-        width: '300px',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        overflow: 'hidden',
-        bgcolor: '#fff'
-      }}
-    >
-      <Box sx={{ p: 2, bgcolor: '#f5f5f5' }}>
-        <Typography variant="h6" component="div" color="text.primary">
-          Kanal Listesi
-        </Typography>
-      </Box>
-      <List disablePadding>
-        {kanallar.map((kanal, index) => (
-          <ListItem
-            button
-            key={index}
-            sx={{ borderBottom: '1px solid #eee' }}
-          >
-            <ListItemIcon>
-              <VideoLibrary color="primary" />
-            </ListItemIcon>
-            <ListItemText primary={kanal.name} />
-          </ListItem>
+    <Box sx={{ p: 3, maxWidth: 600, margin: '0 auto' }}>
+      <Typography variant="h5" gutterBottom>
+        Kanal Listesi
+      </Typography>
+      <Grid container spacing={2}>
+        {kanallar.map((kanal) => (
+          <Grid item xs={12} key={kanal.id}>
+            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 1 }}>
+              <Typography variant="subtitle1" fontWeight="bold">
+                {kanal.isim}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Abone Sayısı: {kanal.aboneSayisi}
+              </Typography>
+            </Paper>
+          </Grid>
         ))}
-      </List>
+      </Grid>
     </Box>
   );
 };
