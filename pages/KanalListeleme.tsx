@@ -1,24 +1,20 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Divider } from '@mui/material';
+import { Card, CardContent, Typography, Grid } from '@mui/material';
 
-const KanalListeleme = () => {
-  const kanallar = [
-    { id: 1, isim: 'Kanal 1' },
-    { id: 2, isim: 'Kanal 2' },
-    { id: 3, isim: 'Kanal 3' }
-  ];
-
+const KanalListeleme = ({ kanallar }) => {
   return (
-    <List>
-      {kanallar.map(( kanal ) => (
-        <div key={kanal.id}>
-          <ListItem>
-            <ListItemText primary={kanal.isim} />
-          </ListItem>
-          <Divider />
-        </div>
+    <Grid container spacing={2}>
+      {kanallar.map((kanal) => (
+        <Grid item xs={12} sm={6} md={4} key={kanal.id}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">{kanal.ad}</Typography>
+              <Typography color="textSecondary">{kanal.aciklama}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       ))}
-    </List>
+    </Grid>
   );
 };
 
