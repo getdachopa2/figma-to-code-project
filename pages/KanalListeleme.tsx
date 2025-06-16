@@ -1,27 +1,55 @@
 import React from 'react';
-import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Typography, IconButton } from '@mui/material';
+import { Add, Remove } from '@mui/icons-material';
 
-const KanalListeleme = () => {
-  const kanallar = [
-    { id: 1, isim: 'Genel', mesajSayisi: 120 },
-    { id: 2, isim: 'Projeler', mesajSayisi: 45 },
-    { id: 3, isim: 'Destek', mesajSayisi: 78 },
-    { id: 4, isim: 'İcmalar', mesajSayisi: 34 },
-  ];
+const KanalListeleme: React.FC = () => {
+  const channels = [{ name: 'Genel' }, { name: 'Proje Güncellemeleri' }, { name: 'Yardım' }];
+  const [expanded, setExpanded] = React.useState<boolean>(true);
+
+  const handleToggle = () => {
+    setExpanded(!expanded);
+  };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', borderRadius: 2, overflow: 'hidden' }}>
-      <Typography variant="h6" sx={{ p: 2, backgroundColor: '#1976d2', color: '#fff' }}>Kanal Listesi</Typography>
-      <List>
-        {kanallar.map((kanal) => (
-          <ListItem key={kanal.id} sx={{ borderBottom: '1px solid #e0e0e0' }}>
-            <ListItemText
-              primary={kanal.isim}
-              secondary={`${kanal.mesajSayisi} mesaj`}
-            />
-          </ListItem>
-        ))}
-      </List>
+    <Box sx={{ width: 300, border: '1px solid #ccc', borderRadius: 2, overflow: 'hidden' }}>
+      <Box
+        onClick={handleToggle}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: 1,
+          backgroundColor: '#f0f0f0',
+          cursor: 'pointer'
+        }}
+      >
+        <Typography variant="subtitle1" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
+          Kanallar
+        </Typography>
+        <IconButton size="small" aria-label={expanded ? 'Kapat' : 'Aç'}>
+          {expanded ? <Remove /> : <Add />}
+        </IconButton>
+      </Box>
+      {expanded && (
+        <Box>
+          {channels.map((channel, index) => (
+            <Box
+              key={index}
+              sx={{
+                padding: 1,
+                paddingLeft: 3,
+                borderTop: index !== 0 ? '1px solid #eee' : 'none',
+                backgroundColor: '#fff',
+                cursor: 'pointer',
+                '&:hover': {
+                  backgroundColor: '#f9f9f9'
+                }
+              }}
+            >
+              <Typography variant="body2"># {channel.name}</Typography>
+            </Box>
+          ))}
+        </Box>
+      )}
     </Box>
   );
 };
