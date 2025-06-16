@@ -1,20 +1,28 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
 
-const KanalListeleme = ({ kanallar }) => {
+const KanalListeleme = () => {
+  const kanallar = [
+    { id: 1, isim: 'Genel', mesajSayisi: 120 },
+    { id: 2, isim: 'Projeler', mesajSayisi: 45 },
+    { id: 3, isim: 'Destek', mesajSayisi: 78 },
+    { id: 4, isim: 'İcmalar', mesajSayisi: 34 },
+  ];
+
   return (
-    <Grid container spacing={2}>
-      {kanallar.map((kanal) => (
-        <Grid item xs={12} sm={6} md={4} key={kanal.id}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">{kanal.ad}</Typography>
-              <Typography color="textSecondary">{kanal.aciklama}</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', borderRadius: 2, overflow: 'hidden' }}>
+      <Typography variant="h6" sx={{ p: 2, backgroundColor: '#1976d2', color: '#fff' }}>Kanal Listesi</Typography>
+      <List>
+        {kanallar.map((kanal) => (
+          <ListItem key={kanal.id} sx={{ borderBottom: '1px solid #e0e0e0' }}>
+            <ListItemText
+              primary={kanal.isim}
+              secondary={`${kanal.mesajSayisi} mesaj`}
+            />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
 };
 
