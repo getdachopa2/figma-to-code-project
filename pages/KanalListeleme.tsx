@@ -1,33 +1,29 @@
-import { Box, Typography, Paper } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import React from 'react';
+import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
 
-const KanalListeleme = () => {
+const KanalListeleme: React.FC = () => {
   const kanallar = [
-    { id: 1, isim: '#Genel', aboneSayisi: 1200 },
-    { id: 2, isim: '#Programlama', aboneSayisi: 950 },
-    { id: 3, isim: '#Müzik', aboneSayisi: 800 },
-    { id: 4, isim: 'Duyurular', aboneSayisi: 500 }
+    { id: 1, isim: 'Genel', açıklama: 'Genel konular' },
+    { id: 2, isim: 'Teknoloji', açıklama: 'Teknoloji ile ilgili güncellemeler' },
+    { id: 3, isim: 'Yemek', açıklama: 'Yemek tarifleri ve önerileri' },
+    { id: 4, isim: 'Seyahat', açıklama: 'Gezi ve seyahat ipuçları' }
   ];
 
   return (
-    <Box sx={{ p: 3, maxWidth: 600, margin: '0 auto' }}>
-      <Typography variant="h5" gutterBottom>
-        Kanal Listesi
+    <Box padding={2} maxWidth={400} border={1} borderColor="grey.300" borderRadius={2}>
+      <Typography variant="h6" gutterBottom>
+        Kanallar
       </Typography>
-      <Grid container spacing={2}>
+      <List>
         {kanallar.map((kanal) => (
-          <Grid item xs={12} key={kanal.id}>
-            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 1 }}>
-              <Typography variant="subtitle1" fontWeight="bold">
-                {kanal.isim}
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Abone Sayısı: {kanal.aboneSayisi}
-              </Typography>
-            </Paper>
-          </Grid>
+          <ListItem key={kanal.id} button>
+            <ListItemText
+              primary={kanal.isim}
+              secondary={kanal.açıklama}
+            />
+          </ListItem>
         ))}
-      </Grid>
+      </List>
     </Box>
   );
 };
